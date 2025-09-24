@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
+import authRouter from './routers/authRouter.js';
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
     res.send('Welcome to the Student Management System API');
 });
 
+app.use('/api/auth', authRouter);
 
 
 mongoose.connect(process.env.MONGODB_URI)

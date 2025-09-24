@@ -45,7 +45,7 @@ export const loginUser = async (req, res) => {
             process.env.JWT_SECRET,
             {expiresIn: '1h'}
         )
-        res.status(200).json({token, userId: user._id, isAdmin: user.isAdmin});
+        res.status(200).json({token, userId: user._id, userName: user.username, isAdmin: user.isAdmin});
     } catch (error) {
         return res.status(500).json({message: 'Server error'});
     }
