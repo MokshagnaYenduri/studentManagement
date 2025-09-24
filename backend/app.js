@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import authRouter from './routers/authRouter.js';
+import studentRouter from './routers/studentRouter.js';
 
 dotenv.config();
 const app = express();
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/auth', authRouter);
-
+app.use('/api/students', studentRouter);
 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => {

@@ -50,3 +50,22 @@ export const loginUser = async (req, res) => {
         return res.status(500).json({message: 'Server error'});
     }
 }
+
+export const createAdmin = async () => {
+    try {
+        const existingAdmin = await User.findOne({ username: 'admin' });
+        if (existingAdmin) {
+            console.log('Admin user already exists');
+            return;
+        }
+        const admin = new User({
+            username: 'admin',
+            password: await bcrypt.hash('1234', 10),
+            isAdmin: true
+        });
+        await admin.save();
+        console.log('Admin user created successfully');
+    } catch (error) {
+        console.error('Error creating admin user:', error);
+    }
+}
