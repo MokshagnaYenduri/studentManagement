@@ -45,3 +45,16 @@ export const updateStudent = async (req, res) => {
         res.status(500).json({message: 'Internal server error'});
     }
 }
+
+export const deleteStudent = async (req, res) => {
+    const {rollNumber} = req.params;
+    try {
+        const student = await Student.findOneAndDelete({rollNumber});
+        if(!student) {
+            return res.status(404).json({message: 'Student not found'});
+        }
+        res.status(200).json({message: 'Student deleted successfully'});
+    } catch (error) {
+        res.status(500).json({message: 'Internal server error'});
+    }
+}
